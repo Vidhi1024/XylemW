@@ -13,8 +13,12 @@ soup = BeautifulSoup(r, "html.parser")
 # print(soup.prettify(encoding="utf-8"))
 
 y=soup.find_all("div", class_="coursebox-text")
-listt=[]
-for div in y:
-    div_text = div.get_text(strip=True)
-    listt.append(div_text)
-print(listt)
+x=soup.find_all("div", class_="coursebox-text-description")
+course_dict = {}
+
+for div_text, div_description in zip(x, y):
+    text = div_text.get_text(strip=True)
+    description = div_description.get_text(strip=True)
+    course_dict[description] = text
+    
+print(course_dict)
